@@ -1,4 +1,3 @@
-from msilib.schema import ListView
 from pyrogram import Client, enums
 import asyncio
 import sys
@@ -62,12 +61,14 @@ class second(QMainWindow, Ui_Form):
         pass
 
     def groupChk(self):
-        async def main():
-            async with app:
-                async for dialog in app.get_dialogs():
+        app = Client("my_account")
+        def main():
+            with app:
+                for dialog in app.get_dialogs():
                     if dialog.chat.type == enums.ChatType.GROUP or dialog.chat.type == enums.ChatType.SUPERGROUP:
                         self.listView = print(f'{str(dialog.chat.id)}:{dialog.chat.title}')
         app.run(main())
+
 
 
 app = QtWidgets.QApplication(sys.argv)
